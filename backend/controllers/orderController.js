@@ -4,7 +4,7 @@ const Order = require('../models/Order');
 const createOrder = async (req, res) => {
   try {
     const { products, totalAmount, deliveryInfo, promoCode, discount } = req.body;
-    const userId = req.user.id; // from auth middleware
+    const userId = req.user._id; // from auth middleware
 
     const order = await Order.create({
       user: userId,
@@ -34,7 +34,7 @@ const getOrderById = async (req, res) => {
     }
 
     // Optional: ensure user owns this order
-    if (order.user.toString() !== req.user.id) {
+    if (order.user.toString() !== req.user._id.toString()) {
       return res.status(403).json({ message: 'Not authorized to view this order' });
     }
 
@@ -48,7 +48,7 @@ const getOrderById = async (req, res) => {
 // Get all orders for a user
 const getAllOrders = async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user._id;
     const orders = await Order.find({ user: userId }).sort({ createdAt: -1 });
     res.json(orders);
   } catch (error) {

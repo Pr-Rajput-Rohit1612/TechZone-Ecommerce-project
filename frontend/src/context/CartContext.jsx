@@ -40,7 +40,7 @@ export const CartProvider = ({ children }) => {
       return;
     }
 
-    const existingItem = cartItem.find((i) => i.id === item.id);
+    const existingItem = cartItem.find((i) => i.productId === item.id);
 
     try {
       const response = await axios.post(

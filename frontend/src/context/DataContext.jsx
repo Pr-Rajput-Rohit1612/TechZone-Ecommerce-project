@@ -18,7 +18,7 @@ import axios from 'axios';
       // const res = await axios.get('https://github.dev/Kolzsticks/Free-Ecommerce-Products-Api/blob/main/products.json');
       
       console.log(res);
-      const productsData = res.data.products || res.data;
+      const productsData = res.data; // API returns array directly
       setData(productsData);
     } catch (error) {
       console.error("Error fetching data:", error);

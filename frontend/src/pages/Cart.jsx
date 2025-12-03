@@ -128,7 +128,7 @@ const Cart = () => {
       
       navigate('/order-success', { 
         state: { 
-          orderId: response.data.order.id,
+          orderId: response.data.order._id,
           orderDetails: response.data.order 
         } 
       });

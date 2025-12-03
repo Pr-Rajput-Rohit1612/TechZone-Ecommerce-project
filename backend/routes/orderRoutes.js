@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const { createOrder, getOrderById, getAllOrders } = require('../controllers/orderController');
-const { authenticateToken } = require('../middleware/authMiddleware');
+const protect = require('../middleware/authMiddleware');
 
 // Create new order
-router.post('/', authenticateToken, createOrder);
+router.post('/', protect, createOrder);
 
 // Get order by ID
-router.get('/:id', authenticateToken, getOrderById);
+router.get('/:id', protect, getOrderById);
 
 // Optional: Get all orders for a user
-router.get('/', authenticateToken, getAllOrders);
+router.get('/', protect, getAllOrders);
 
 module.exports = router;

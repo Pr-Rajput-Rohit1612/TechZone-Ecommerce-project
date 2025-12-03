@@ -9,10 +9,6 @@ const productRoutes = require('./routes/productRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 
-app.use("/api/order", orderRoutes);
-
-
-
 dotenv.config();
 connectDB();
 
@@ -28,8 +24,6 @@ app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/cart', cartRoutes);
-
-app.use('/api/orders', require('./routes/orderRoutes'));
 
 
 // Root route

@@ -117,15 +117,13 @@ const Navbar = () => {
             `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`,
             {
               timeout: 8000,
-              headers: {
-                "User-Agent": "TechZone-App/1.0"
-              }
+              
             }
           );
 
           const address = response.data.address;
           setLocation({
-            city: address.city || address.town || address.village || "Unknown",
+            city: address.city || address.town || address.village || address.suburb || address.municipality ||  address.state_district ||  address.county ||  "Unknown",
             state: address.state || "",
             country: address.country || "",
             full: response.data.display_name

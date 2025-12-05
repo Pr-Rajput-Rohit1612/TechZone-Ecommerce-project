@@ -43,6 +43,7 @@ export const CartProvider = ({ children }) => {
     const existingItem = cartItem.find((i) => i.productId === item.id);
 
     try {
+      console.log("AddToCart payload:", item, "token:", token);
       const response = await axios.post(
         "http://localhost:5000/api/cart/add",
         { product: item },
@@ -57,7 +58,10 @@ export const CartProvider = ({ children }) => {
       }
     } catch (error) {
       console.error("Add to cart error:", error);
-      toast.error("Failed to add item! ❌");
+      // Prefer server-provided message when available so user sees the real cause
+      const serverMessage = error?.response?.data?.message;
+      const errorMessage = serverMessage || error?.message || "Failed to add item! ❌";
+      toast.error(errorMessage);
     }
   };
 

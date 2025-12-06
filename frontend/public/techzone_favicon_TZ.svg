@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background -->
+  <rect width="100" height="100" fill="#1a1a1a" rx="18"/>
+  
+  <!-- T Letter (White) -->
+  <path d="M 20 25 L 48 25 L 48 32 L 38 32 L 38 75 L 30 75 L 30 32 L 20 32 Z" fill="#ffffff"/>
+  
+  <!-- Z Letter (Red) -->
+  <path d="M 52 25 L 80 25 L 80 32 L 63 32 L 80 68 L 80 75 L 52 75 L 52 68 L 69 68 L 52 32 Z" fill="#ff5757"/>
+  
+  <!-- Small accent dot -->
+  <circle cx="50" cy="50" r="2" fill="#ff5757" opacity="0.4"/>
+</svg>

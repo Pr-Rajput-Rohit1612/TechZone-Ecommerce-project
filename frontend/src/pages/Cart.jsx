@@ -7,6 +7,7 @@ import { FaRegTrashAlt } from 'react-icons/fa'
 import { LuNotebookText } from 'react-icons/lu'
 import { MdDeliveryDining } from 'react-icons/md'
 import { GiShoppingBag } from 'react-icons/gi'
+import { NavLink as NAVLINK } from 'react-router-dom';
 
 const Cart = () => {
   const { cartItem, removeFromCart, increaseQty, decreaseQty } = useCart();
@@ -79,7 +80,7 @@ const Cart = () => {
     const promoCodes = {
       'SAVE10': 10,
       'SAVE20': 20,
-      'SAVE30': 30,
+      'JAIBABAKI': 30,
       'WELCOME': 15,
       'FIRST': 25
     };
@@ -332,7 +333,7 @@ const Cart = () => {
                     </button>
                   </div>
                   <p className='text-xs text-gray-500 mt-2'>
-                    💡 Try: SAVE10, SAVE20, SAVE30, WELCOME, FIRST
+                    💡 for promoCodes you can just email us , we'll help you for Sure <span className='px-3 py-1 text-sm bg-pink-600 text-white rounded-md hover:bg-pink-700 transition'> <NAVLINK  to='/contact' > Email Us  </NAVLINK> </span>
                   </p>
                 </div>
 

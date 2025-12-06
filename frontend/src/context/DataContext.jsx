@@ -1,38 +1,35 @@
-import React, {  useEffect} from 'react';
-import { useState } from 'react';
-import { createContext } from 'react';
+
+import React, { useEffect, useState, createContext } from 'react';
 import axios from 'axios';
 
+const DataContext = createContext(null);
 
- const DataContext = createContext(null);
+// API Base URL - Works for both local and production
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
- const DataProvider = ({ children }) => {
+const DataProvider = ({ children }) => {
   const [data, setData] = useState([]);
 
   const fetchAllData = async () => {
     try {
-      
-      // const res = await axios.get('https://fakestoreapi.com/products');
-      const res = await axios.get('http://localhost:5000/api/products');
-      // const res = await axios.get('https://real-time-amazon-data.p.rapidapi.com/search?query=electronics&page=1&country=US')
-      // const res = await axios.get('https://github.dev/Kolzsticks/Free-Ecommerce-Products-Api/blob/main/products.json');
-      
+      const res = await axios.get(`${API_URL}/api/products`);
       console.log(res);
-      const productsData = res.data; // API returns array directly
+      const productsData = res.data;
       setData(productsData);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-const getUniqueCategory =(data, property)=> {
-        const categories = data?.map((curElem) =>{
-        return curElem[property]
-        })
-        return ["All" , ...new Set(categories)];
-    };
-    const uniqueCategories = getUniqueCategory(data, "category");
-    const brandData = getUniqueCategory(data, "brand");
+  const getUniqueCategory = (data, property) => {
+    const categories = data?.map((curElem) => {
+      return curElem[property];
+    });
+    return ["All", ...new Set(categories)];
+  };
+
+  const uniqueCategories = getUniqueCategory(data, "category");
+  const brandData = getUniqueCategory(data, "brand");
 
   useEffect(() => {
     fetchAllData();
@@ -44,4 +41,5 @@ const getUniqueCategory =(data, property)=> {
     </DataContext.Provider>
   );
 };
+
 export { DataContext, DataProvider };

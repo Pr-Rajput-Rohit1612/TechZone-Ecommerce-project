@@ -5,9 +5,6 @@ import axios from "axios";
 
 export const CartContext = createContext();
 
-// API Base URL - Works for both local and production
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
-
 export const CartProvider = ({ children }) => {
   const [cartItem, setCartItem] = useState([]);
 
@@ -20,7 +17,7 @@ export const CartProvider = ({ children }) => {
     if (!token) return;
 
     try {
-      const response = await axios.get(`${API_URL}/api/cart`, {
+      const response = await axios.get("http://localhost:5000/api/cart", {
         headers: { Authorization: `Bearer ${token}` }
       });
       setCartItem(response.data.items || []);
@@ -48,7 +45,7 @@ export const CartProvider = ({ children }) => {
     try {
       console.log("AddToCart payload:", item, "token:", token);
       const response = await axios.post(
-        `${API_URL}/api/cart/add`,
+        "http://localhost:5000/api/cart/add",
         { product: item },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -61,6 +58,7 @@ export const CartProvider = ({ children }) => {
       }
     } catch (error) {
       console.error("Add to cart error:", error);
+      // Prefer server-provided message when available so user sees the real cause
       const serverMessage = error?.response?.data?.message;
       const errorMessage = serverMessage || error?.message || "Failed to add item! ❌";
       toast.error(errorMessage);
@@ -73,7 +71,7 @@ export const CartProvider = ({ children }) => {
 
     try {
       const response = await axios.post(
-        `${API_URL}/api/cart/remove`,
+        "http://localhost:5000/api/cart/remove",
         { productId: id },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -91,7 +89,7 @@ export const CartProvider = ({ children }) => {
 
     try {
       const response = await axios.post(
-        `${API_URL}/api/cart/update`,
+        "http://localhost:5000/api/cart/update",
         { productId: id, action: "increase" },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -107,31 +105,33 @@ export const CartProvider = ({ children }) => {
 
     try {
       const response = await axios.post(
-        `${API_URL}/api/cart/update`,
+        "http://localhost:5000/api/cart/update",
         { productId: id, action: "decrease" },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setCartItem(response.data.items);
-      toast.loading("1 Item removed! 🗑️", { duration: 2000 });
+      toast.loading(" 1 Item removed! 🗑️", { duration: 2000 });
     } catch (error) {
       console.error("Decrease qty error:", error);
     }
   };
 
-  // Clear cart
-  const clearCart = async () => {
-    const token = getToken();
-    if (!token) return;
+// Clear cart
 
-    try {
-      await axios.delete(`${API_URL}/api/cart/clear`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      setCartItem([]);
-    } catch (error) {
-      console.error("Clear cart error:", error);
-    }
-  };
+  const clearCart = async () => {
+  const token = getToken();
+  if (!token) return;
+
+  try {
+    await axios.delete("http://localhost:5000/api/cart/clear", {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    setCartItem([]);
+  } catch (error) {
+    console.error("Clear cart error:", error);
+  }
+};
+
 
   return (
     <CartContext.Provider
@@ -143,7 +143,7 @@ export const CartProvider = ({ children }) => {
         increaseQty,
         decreaseQty,
         fetchCart,
-        clearCart
+        clearCart  
       }}
     >
       {children}

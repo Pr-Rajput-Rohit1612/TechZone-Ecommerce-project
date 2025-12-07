@@ -19,7 +19,7 @@ app.use(cors({
   origin: [
     'http://localhost:5173',  
     'http://localhost:5174',  
-    'https://tech-zone-tz.vercel.app/',  // Production (Vercel URL)
+    'https://tech-zone-tz.vercel.app',  // Production (Vercel URL)
   ],
   credentials: true
 })); 

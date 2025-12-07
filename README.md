@@ -1,10 +1,10 @@
 # TechZone - E-Commerce Platform
 
-A full-stack e-commerce application for selling electronics and tech products. Built with modern technologies including React, Node.js, MongoDB, and Tailwind CSS.
+A full-stack e-commerce application for selling fashion,  electronics and tech products. Built with modern technologies including React + vite, Node.js, MongoDB, and Tailwind CSS.
 
 ## 🌟 Features
 
-- **Product Management**: Browse, search, and filter electronics
+- **Product Management**: Browse, search, and filter items
 - **User Authentication**: Secure user registration and login
 - **Shopping Cart**: Add/remove items and manage quantities
 - **Order Management**: Place orders and track order history

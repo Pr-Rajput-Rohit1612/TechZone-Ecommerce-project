@@ -5,6 +5,8 @@ import axios from "axios";
 
 export const CartContext = createContext();
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 export const CartProvider = ({ children }) => {
   const [cartItem, setCartItem] = useState([]);
 
@@ -17,7 +19,7 @@ export const CartProvider = ({ children }) => {
     if (!token) return;
 
     try {
-      const response = await axios.get("http://localhost:5000/api/cart", {
+      const response = await axios.get(`${API_URL}/api/cart`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setCartItem(response.data.items || []);
@@ -45,7 +47,7 @@ export const CartProvider = ({ children }) => {
     try {
       console.log("AddToCart payload:", item, "token:", token);
       const response = await axios.post(
-        "http://localhost:5000/api/cart/add",
+        `${API_URL}/api/cart/add`,
         { product: item },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -71,7 +73,7 @@ export const CartProvider = ({ children }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/cart/remove",
+        `${API_URL}/api/cart/remove`,
         { productId: id },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -89,7 +91,7 @@ export const CartProvider = ({ children }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/cart/update",
+        `${API_URL}/api/cart/update`,
         { productId: id, action: "increase" },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -105,7 +107,7 @@ export const CartProvider = ({ children }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/cart/update",
+        `${API_URL}/api/cart/update`,
         { productId: id, action: "decrease" },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -123,7 +125,7 @@ export const CartProvider = ({ children }) => {
   if (!token) return;
 
   try {
-    await axios.delete("http://localhost:5000/api/cart/clear", {
+    await axios.delete(`${API_URL}/api/cart/clear`, {
       headers: { Authorization: `Bearer ${token}` }
     });
     setCartItem([]);

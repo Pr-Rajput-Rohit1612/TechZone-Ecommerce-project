@@ -13,8 +13,16 @@ import axios from 'axios';
     try {
       
       // const res = await axios.get('https://fakestoreapi.com/products');
-      const res = await axios.get('http://localhost:5000/api/products');
+      // const res = await axios.get('http://localhost:5000/api/products');
+          // const API_URL = process.env.VITE_API_URL || "http://localhost:5000";
+          // const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api/products";
+          // const res = await axios.get(`${API_URL}/api/products`);
+          const res = await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/products`);
+
+
       // const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+
       // const res = await axios.get('https://real-time-amazon-data.p.rapidapi.com/search?query=electronics&page=1&country=US')
       // const res = await axios.get('https://github.dev/Kolzsticks/Free-Ecommerce-Products-Api/blob/main/products.json');
       

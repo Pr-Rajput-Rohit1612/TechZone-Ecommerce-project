@@ -29,7 +29,7 @@ export default function Signin({ closeModel }) {
 
       closeModel();
       navigate("/home");
-      // window.location.reload();
+      window.scrollTo(0, 0);
     } catch (error) {
       console.error("Login failed:", error);
       toast.error("Invalid credentials! ❌");

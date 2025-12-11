@@ -26,7 +26,18 @@ const Navbar = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     setIsLoggedIn(!!token);
-  }, []);
+
+    const handleAuthChange = () => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
+  };
+
+  window.addEventListener("authChange", handleAuthChange);
+  return () => window.removeEventListener("authChange", handleAuthChange);
+}, []);
+  
+
+  
 
   useEffect(() => {
     getCurrentLocation();

@@ -25,6 +25,7 @@ export default function Signin({ closeModel }) {
 
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
+      window.dispatchEvent(new Event("authChange"));
 
       closeModel();
       navigate("/home");

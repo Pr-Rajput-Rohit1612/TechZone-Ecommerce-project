@@ -52,6 +52,8 @@ export default function Signup({ closeModel }) {
 
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
+      window.dispatchEvent(new Event("authChange")); 
+
       toast.success("Signup Successful! 🎉");
       closeModel();
       navigate("/home");
